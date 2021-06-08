@@ -21,7 +21,7 @@ export default function Posts({ data }) {
                     const mdPath=pathNodes[index].relativeDirectory
                     console.log( "path is : " + mdPath )
 
-                    return <Link to={"/md_files/" + mdPath + "/" + slugValue} key={mdId}>
+                    return <Link to={"/" + mdPath + "/" + slugValue} key={mdId}>
                         <div>
                             <p>{slugValue}</p>
                         </div>
@@ -44,7 +44,7 @@ export const query = graphql`
                 id
             }
         }
-        allFile {
+        allFile(filter: {relativePath: {}, extension: {eq: "md"}}) {
             nodes {
                 relativeDirectory
                 relativePath

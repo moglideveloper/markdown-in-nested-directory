@@ -12,7 +12,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     }
                 }
             }
-            allFile {
+            allFile(filter: {relativePath: {}, extension: {eq: "md"}}) {
                 nodes {
                     relativeDirectory
                 }
@@ -30,9 +30,10 @@ exports.createPages = async ({ graphql, actions }) => {
         console.log("[create-page] slug is : " + slugValue)
         const mdPath=pathNodes[index].relativeDirectory
         console.log( "[create-page] path is : " + mdPath )
+        console.log("full path : " + "/" + mdPath + "/" + slugValue)
 
         actions.createPage({
-            path: "/md_files/" + mdPath + "/" + slugValue,
+            path: "/" + mdPath + "/" + slugValue,
             component: path.resolve('./src/templates/project-details.js'),
             context: { slug: slugValue }
         })
